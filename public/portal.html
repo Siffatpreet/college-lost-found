@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>College Lost & Found Portal</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+}
+
+/* Navigation */
+
+header{
+    background:#0066cc;
+    color:#fff;
+    padding:15px 50px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    align-items:center;
+}
+
+nav ul li{
+    margin-left:25px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav ul li a:hover{
+    text-decoration:underline;
+}
+
+/* Hero */
+
+.hero{
+    background:linear-gradient(135deg,#0077ff,#00c6ff);
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h1{
+    font-size:48px;
+}
+
+.hero p{
+    margin-top:15px;
+    font-size:18px;
+}
+
+/* Search */
+
+.search-box{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.search-box input{
+    width:500px;
+    max-width:90%;
+    padding:15px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    outline:none;
+}
+
+.search-box button{
+    padding:15px 25px;
+    border:none;
+    border-radius:30px;
+    background:#ff9800;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.search-box button:hover{
+    background:#e68900;
+}
+
+/* Buttons */
+
+.action-buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.lost-btn,
+.found-btn{
+    padding:15px 35px;
+    border:none;
+    border-radius:30px;
+    color:white;
+    cursor:pointer;
+    font-size:17px;
+    transition:.3s;
+}
+
+.lost-btn{
+    background:#e53935;
+}
+
+.lost-btn:hover{
+    background:#c62828;
+}
+
+.found-btn{
+    background:#43a047;
+}
+
+.found-btn:hover{
+    background:#2e7d32;
+}
+
+/* Cards */
+
+.container{
+    width:90%;
+    margin:auto;
+    padding:50px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+    color:#333;
+    font-size:32px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.card h3{
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.card p{
+    color:#555;
+    margin-bottom:8px;
+    line-height:1.5;
+}
+
+.card button{
+    margin-top:10px;
+    padding:10px 20px;
+    background:#0077ff;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.card button:hover{
+    background:#005fd1;
+}
+
+/* Status */
+
+.status{
+    text-align:center;
+    color:#555;
+    font-size:18px;
+    padding:20px;
+}
+
+/* Footer */
+
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+    header{
+        padding:15px 25px;
+    }
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:768px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+    }
+
+    nav ul li{
+        margin:0;
+    }
+
+    .hero{
+        padding:50px 15px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .search-box{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .search-box input{
+        width:100%;
+    }
+
+    .search-box button{
+        width:100%;
+        max-width:300px;
+    }
+
+    .action-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .lost-btn,
+    .found-btn{
+        width:100%;
+        max-width:320px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        width:95%;
+    }
+}
+
+@media(max-width:480px){
+
+    .logo{
+        font-size:22px;
+    }
+
+    .hero h1{
+        font-size:24px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .section-title{
+        font-size:26px;
+    }
+
+    footer{
+        font-size:14px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<header>
+
+<nav>
+
+<div class="logo">
+🎒 Lost & Found
+</div>
+
+<ul>
+
+<li>
+<a href="portal.html">Home</a>
+</li>
+
+<li>
+<a href="LostItems.HTML">Lost Items</a>
+</li>
+
+<li>
+<a href="FoundItems.HTML">Found Items</a>
+</li>
+
+<li>
+<a href="#">Contact</a>
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+<h1>
+College Lost & Found Portal
+</h1>
+
+<p>
+Search, Report, and Claim Lost & Found Items Easily
+</p>
+
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search by item name, description or location..."
+>
+
+<button onclick="searchItems()">
+🔍 Search
+</button>
+
+</div>
+
+
+<div class="action-buttons">
+
+<a href="LostItems.HTML">
+
+<button class="lost-btn">
+🔴 Report Lost Item
+</button>
+
+</a>
+
+
+<a href="FoundItems.HTML">
+
+<button class="found-btn">
+🟢 Report Found Item
+</button>
+
+</a>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     LOST ITEMS
+========================= -->
+
+<div class="container">
+
+<h2 class="section-title">
+Recently Lost Items
+</h2>
+
+<div id="lostStatus" class="status">
+Loading lost items...
+</div>
+
+<div class="cards" id="lostItems">
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     FOUND ITEMS
+========================= -->
+
+<div class="container">
+
+<h2 class="section-title">
+Recently Found Items
+</h2>
+
+<div id="foundStatus" class="status">
+Loading found items...
+</div>
+
+<div class="cards" id="foundItems">
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<p>
+© 2026 College Lost & Found Portal | Designed for College Project
+</p>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+let allItems = [];
+
+
+// Load items from MongoDB
+async function loadItems(){
+
+    try{
+
+        const response = await fetch("/api/items");
+
+        if(!response.ok){
+
+            throw new Error(
+                "Server returned " + response.status
+            );
+
+        }
+
+        allItems = await response.json();
+
+        displayItems(allItems);
+
+    }
+
+    catch(error){
+
+        console.error("Error loading items:", error);
+
+        document.getElementById("lostStatus").textContent =
+            "❌ Could not load lost items.";
+
+        document.getElementById("foundStatus").textContent =
+            "❌ Could not load found items.";
+
+    }
+
+}
+
+
+
+// Display items
+function displayItems(items){
+
+    const lostContainer =
+        document.getElementById("lostItems");
+
+    const foundContainer =
+        document.getElementById("foundItems");
+
+
+    const lostStatus =
+        document.getElementById("lostStatus");
+
+    const foundStatus =
+        document.getElementById("foundStatus");
+
+
+    lostContainer.innerHTML = "";
+    foundContainer.innerHTML = "";
+
+
+    const lostItems =
+        items.filter(item => item.type === "lost");
+
+
+    const foundItems =
+        items.filter(item => item.type === "found");
+
+
+    // Lost items
+
+    if(lostItems.length === 0){
+
+        lostStatus.textContent =
+            "No lost items reported.";
+
+    }
+
+    else{
+
+        lostStatus.textContent = "";
+
+        lostItems.forEach(item => {
+
+            lostContainer.appendChild(
+                createCard(item)
+            );
+
+        });
+
+    }
+
+
+    // Found items
+
+    if(foundItems.length === 0){
+
+        foundStatus.textContent =
+            "No found items reported.";
+
+    }
+
+    else{
+
+        foundStatus.textContent = "";
+
+        foundItems.forEach(item => {
+
+            foundContainer.appendChild(
+                createCard(item)
+            );
+
+        });
+
+    }
+
+}
+
+
+
+// Create card
+function createCard(item){
+
+    const card =
+        document.createElement("div");
+
+    card.className = "card";
+
+
+    let imageHTML = "";
+
+    if(item.photo){
+
+        imageHTML = `
+            <img
+                src="${item.photo}"
+                alt="${item.itemName}"
+            >
+        `;
+
+    }
+
+
+    const date =
+        item.date
+        ? new Date(item.date).toLocaleDateString()
+        : "Not provided";
+
+
+    card.innerHTML = `
+
+        ${imageHTML}
+
+        <div class="card-content">
+
+            <h3>
+                ${escapeHTML(item.itemName)}
+            </h3>
+
+            <p>
+                <b>
+                    ${item.type === "found"
+                        ? "Found At:"
+                        : "Location:"
+                    }
+                </b>
+
+                ${escapeHTML(item.location)}
+            </p>
+
+            <p>
+                <b>Date:</b>
+                ${date}
+            </p>
+
+            <p>
+                <b>Description:</b>
+                ${escapeHTML(item.description)}
+            </p>
+
+            <p>
+                <b>Contact:</b>
+                ${escapeHTML(item.contact)}
+            </p>
+
+            <button
+                onclick="viewItem('${item._id}')"
+            >
+                ${item.type === "found"
+                    ? "Claim Item"
+                    : "View Details"
+                }
+            </button>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+
+// Search
+function searchItems(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    if(search === ""){
+
+        displayItems(allItems);
+
+        return;
+
+    }
+
+
+    const filtered =
+        allItems.filter(item => {
+
+            return (
+
+                item.itemName
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                item.description
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                item.location
+                    .toLowerCase()
+                    .includes(search)
+
+            );
+
+        });
+
+
+    displayItems(filtered);
+
+}
+
+
+
+// View item
+function viewItem(id){
+
+    const item =
+        allItems.find(
+            item => item._id === id
+        );
+
+
+    if(!item){
+
+        alert("Item not found.");
+
+        return;
+
+    }
+
+
+    alert(
+
+        "Item: " + item.itemName +
+        "\n\n" +
+
+        "Description: " + item.description +
+        "\n\n" +
+
+        "Location: " + item.location +
+        "\n\n" +
+
+        "Date: " +
+        new Date(item.date)
+            .toLocaleDateString() +
+        "\n\n" +
+
+        "Contact: " + item.contact
+
+    );
+
+}
+
+
+
+// Prevent HTML injection
+function escapeHTML(value){
+
+    if(value === null || value === undefined){
+
+        return "";
+
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+// Start
+loadItems();
+
+</script>
+
+
+</body>
+
+</html>
