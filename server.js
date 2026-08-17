@@ -9,18 +9,23 @@ require("dotenv").config();
 const Item = require("./model/Item");
 
 const app = express();
-app.use(express.static("public"));
+
+// Middleware
 app.use(cors());
 app.use(express.json());
-// Create uploads folder if it doesn't exist
+app.use(express.static("public"));
+
+// Uploads folder
 const uploadDir = path.join(__dirname, "uploads");
 
 if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
+    fs.mkdirSync(uploadDir, { recursive: true });
 }
+
 // Serve uploaded images
 app.use("/uploads", express.static(uploadDir));
-// Multer storage configuration
+
+// Multer configuration
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, uploadDir);
@@ -28,7 +33,10 @@ const storage = multer.diskStorage({
 
     filename: function (req, file, cb) {
         const uniqueName =
-            Date.now() + "-" + Math.round(Math.random() * 1E9) + path.extname(file.originalname);
+            Date.now() +
+            "-" +
+            Math.round(Math.random() * 1E9) +
+            path.extname(file.originalname);
 
         cb(null, uniqueName);
     }
@@ -47,18 +55,20 @@ const upload = multer({
         }
     }
 });
+
 // Home route
 app.get("/", (req, res) => {
     res.send("Lost & Found Backend is running!");
 });
+
 // Test route
 app.get("/api/test", (req, res) => {
     res.send("API route is working!");
 });
+
 // Create Lost/Found item
 app.post("/api/items", upload.single("photo"), async (req, res) => {
     try {
-        // Found items MUST have a photo
         if (req.body.type === "found" && !req.file) {
             return res.status(400).json({
                 error: "Photo is required for found items."
@@ -80,40 +90,45 @@ app.post("/api/items", upload.single("photo"), async (req, res) => {
         res.status(201).json(savedItem);
 
     } catch (error) {
-
         res.status(400).json({
             error: error.message
         });
-
     }
 });
+
 // Get all items
 app.get("/api/items", async (req, res) => {
     try {
-
         const items = await Item.find().sort({ createdAt: -1 });
 
         res.json(items);
 
     } catch (error) {
-
         res.status(500).json({
             error: error.message
         });
-
     }
 });
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log("MongoDB connected successfully!");
-    })
-    .catch((error) => {
-        console.log("MongoDB connection failed:", error.message);
-    });
-// Start server
-const PORT = 5001;
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Check MongoDB environment variable
+console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
+
+// MongoDB connection
+if (!process.env.MONGO_URI) {
+    console.error("ERROR: MONGO_URI is not defined.");
+} else {
+    mongoose.connect(process.env.MONGO_URI)
+        .then(() => {
+            console.log("MongoDB connected successfully!");
+        })
+        .catch((error) => {
+            console.log("MongoDB connection failed:", error.message);
+        });
+}
+
+// Render provides PORT automatically
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
 });
