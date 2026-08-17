@@ -112,23 +112,44 @@
 </div>
 
 <script>
+
+// Render backend URL
+const API_URL = "https://college-lost-found-61k7.onrender.com";
+
 document.getElementById("foundItemForm").addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
+    const message = document.getElementById("message");
+
     const formData = new FormData();
 
     formData.append("type", "found");
-    formData.append("itemName", document.getElementById("itemName").value);
-    formData.append("description", document.getElementById("description").value);
-    formData.append("location", document.getElementById("location").value);
-    formData.append("date", document.getElementById("date").value);
-    formData.append("contact", document.getElementById("contact").value);
+    formData.append(
+        "itemName",
+        document.getElementById("itemName").value
+    );
+    formData.append(
+        "description",
+        document.getElementById("description").value
+    );
+    formData.append(
+        "location",
+        document.getElementById("location").value
+    );
+    formData.append(
+        "date",
+        document.getElementById("date").value
+    );
+    formData.append(
+        "contact",
+        document.getElementById("contact").value
+    );
 
     const photo = document.getElementById("photo").files[0];
 
     if (!photo) {
-        document.getElementById("message").textContent =
+        message.textContent =
             "❌ Photo is required for found items.";
         return;
     }
@@ -137,37 +158,43 @@ document.getElementById("foundItemForm").addEventListener("submit", async functi
 
     try {
 
-        const response = await fetch("http://localhost:5001/api/items", {
-            method: "POST",
-            body: formData
-        });
+        message.textContent = "Uploading...";
+
+        const response = await fetch(
+            `${API_URL}/api/items`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
 
         const data = await response.json();
 
         if (response.ok) {
 
-            document.getElementById("message").textContent =
+            message.textContent =
                 "✅ Found item reported successfully!";
 
             document.getElementById("foundItemForm").reset();
 
         } else {
 
-            document.getElementById("message").textContent =
-                "❌ Error: " + data.error;
+            message.textContent =
+                "❌ Error: " + (data.error || "Something went wrong.");
 
         }
 
     } catch (error) {
 
-        document.getElementById("message").textContent =
+        message.textContent =
             "❌ Could not connect to the server.";
 
-        console.error(error);
+        console.error("Error:", error);
 
     }
 
 });
+
 </script>
 
 </body>
