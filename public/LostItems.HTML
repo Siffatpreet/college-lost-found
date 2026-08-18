@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Lost Item</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+        }
+
+        header {
+            background: #e53935;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #e53935;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #c62828;
+        }
+
+        #message {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🔴 Report Lost Item</h1>
+</header>
+
+<div class="form-container">
+
+    <form id="lostItemForm">
+
+        <label>Item Name</label>
+        <input type="text" id="itemName" required>
+
+        <label>Description</label>
+        <textarea id="description" required></textarea>
+
+        <label>Location</label>
+        <input type="text" id="location" required>
+
+        <label>Date Lost</label>
+        <input type="date" id="date" required>
+
+        <label>Contact</label>
+        <input type="text" id="contact" required>
+
+        <button type="submit">Report Lost Item</button>
+
+    </form>
+
+    <div id="message"></div>
+
+</div>
+
+<script>
+
+const API_URL = "https://college-lost-found-61k7.onrender.com";
+
+document.getElementById("lostItemForm").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const message = document.getElementById("message");
+
+    const item = {
+        type: "lost",
+        itemName: document.getElementById("itemName").value,
+        description: document.getElementById("description").value,
+        location: document.getElementById("location").value,
+        date: document.getElementById("date").value,
+        contact: document.getElementById("contact").value
+    };
+
+    try {
+
+        message.textContent = "Submitting...";
+
+        const response = await fetch(`${API_URL}/api/items`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(item)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            message.textContent =
+                "✅ Lost item reported successfully!";
+
+            document.getElementById("lostItemForm").reset();
+
+        } else {
+
+            message.textContent =
+                "❌ Error: " + (data.error || "Something went wrong.");
+
+        }
+
+    } catch (error) {
+
+        message.textContent =
+            "❌ Could not connect to the server.";
+
+        console.error("Error:", error);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
