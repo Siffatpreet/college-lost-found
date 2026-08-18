@@ -125,7 +125,18 @@ if (!process.env.MONGO_URI) {
             console.log("MongoDB connection failed:", error.message);
         });
 }
+// Clean page URLs
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "portal.html"));
+});
 
+app.get("/lost", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "LostItems.HTML"));
+});
+
+app.get("/found", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "FoundItems.HTML"));
+});
 // Render provides PORT automatically
 const PORT = process.env.PORT || 5001;
 
