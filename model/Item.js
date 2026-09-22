@@ -39,6 +39,27 @@ const itemSchema = new mongoose.Schema(
         contact: {
             type: String,
             required: true
+        },
+
+        // =========================
+        // MATCHING SYSTEM
+        // =========================
+
+        matchStatus: {
+            type: String,
+            enum: ["waiting", "matched"],
+            default: "waiting"
+        },
+
+        matchScore: {
+            type: Number,
+            default: 0
+        },
+
+        matchedItem: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Item",
+            default: null
         }
     },
     {

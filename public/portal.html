@@ -1,550 +1,440 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>College Lost & Found Portal</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:#f4f7fc;
-}
-
-/* Navigation */
-
-header{
-    background:#0066cc;
-    color:#fff;
-    padding:15px 50px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:28px;
-    font-weight:bold;
-}
-
-nav ul{
-    list-style:none;
-    display:flex;
-    align-items:center;
-}
-
-nav ul li{
-    margin-left:25px;
-}
-
-nav ul li a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-nav ul li a:hover{
-    text-decoration:underline;
-}
-
-/* Hero */
-
-.hero{
-    background:linear-gradient(135deg,#0077ff,#00c6ff);
-    color:white;
-    text-align:center;
-    padding:80px 20px;
-}
-
-.hero h1{
-    font-size:48px;
-}
-
-.hero p{
-    margin-top:15px;
-    font-size:18px;
-}
-
-/* Search */
-
-.search-box{
-    margin-top:35px;
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.search-box input{
-    width:500px;
-    max-width:90%;
-    padding:15px;
-    border:none;
-    border-radius:30px;
-    font-size:16px;
-    outline:none;
-}
-
-.search-box button{
-    padding:15px 25px;
-    border:none;
-    border-radius:30px;
-    background:#ff9800;
-    color:white;
-    cursor:pointer;
-    font-size:16px;
-}
-
-.search-box button:hover{
-    background:#e68900;
-}
-
-/* Buttons */
-
-.action-buttons{
-    margin-top:30px;
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.lost-btn,
-.found-btn{
-    padding:15px 35px;
-    border:none;
-    border-radius:30px;
-    color:white;
-    cursor:pointer;
-    font-size:17px;
-    transition:.3s;
-}
-
-.lost-btn{
-    background:#e53935;
-}
-
-.lost-btn:hover{
-    background:#c62828;
-}
-
-.found-btn{
-    background:#43a047;
-}
-
-.found-btn:hover{
-    background:#2e7d32;
-}
-
-/* Cards */
-
-.container{
-    width:90%;
-    margin:auto;
-    padding:50px 0;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:35px;
-    color:#333;
-    font-size:32px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-}
-
-.card img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
-}
-
-.card-content{
-    padding:20px;
-}
-
-.card h3{
-    margin-bottom:10px;
-    font-size:22px;
-}
-
-.card p{
-    color:#555;
-    margin-bottom:8px;
-    line-height:1.5;
-}
-
-.card button{
-    margin-top:10px;
-    padding:10px 20px;
-    background:#0077ff;
-    color:white;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.card button:hover{
-    background:#005fd1;
-}
-
-/* Status */
-
-.status{
-    text-align:center;
-    color:#555;
-    font-size:18px;
-    padding:20px;
-}
-
-/* Footer */
-
-footer{
-    background:#222;
-    color:white;
-    text-align:center;
-    padding:20px;
-    margin-top:40px;
-}
-
-/* Responsive */
-
-@media(max-width:992px){
-
-    header{
-        padding:15px 25px;
-    }
-
-    .hero{
-        padding:60px 20px;
-    }
-
-    .hero h1{
-        font-size:38px;
-    }
-
-    .hero p{
-        font-size:16px;
-    }
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:768px){
-
-    nav{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    nav ul{
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:10px;
-    }
-
-    nav ul li{
-        margin:0;
-    }
-
-    .hero{
-        padding:50px 15px;
-    }
-
-    .hero h1{
-        font-size:30px;
-    }
-
-    .hero p{
-        font-size:15px;
-    }
-
-    .search-box{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .search-box input{
-        width:100%;
-    }
-
-    .search-box button{
-        width:100%;
-        max-width:300px;
-    }
-
-    .action-buttons{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .lost-btn,
-    .found-btn{
-        width:100%;
-        max-width:320px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .container{
-        width:95%;
-    }
-}
-
-@media(max-width:480px){
-
-    .logo{
-        font-size:22px;
-    }
-
-    .hero h1{
-        font-size:24px;
-    }
-
-    .hero p{
-        font-size:14px;
-    }
-
-    .section-title{
-        font-size:26px;
-    }
-
-    footer{
-        font-size:14px;
-    }
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Lost & Found</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            padding: 18px 40px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: #60a5fa;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px;
+            background: linear-gradient(135deg, #2563eb, #1e3a8a);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons a {
+            text-decoration: none;
+        }
+
+        .action-buttons button {
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .lost-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .found-btn {
+            background: #22c55e;
+            color: white;
+        }
+
+        .action-buttons button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .search-box input {
+            width: 100%;
+            max-width: 600px;
+            padding: 14px 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 18px;
+        }
+
+        .card-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            margin: 7px 0;
+            color: #555;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .waiting {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .matched {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .view-btn {
+            margin-top: 12px;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .view-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .status {
+            color: #777;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
 <header>
 
-<nav>
+    <nav>
 
-<div class="logo">
-🎒 Lost & Found
-</div>
+        <div class="logo">
+            🎒 Lost & Found
+        </div>
 
-<ul>
+        <ul>
 
-<li>
-<a href="/">Home</a>
-</li>
+            <li>
+                <a href="/">Home</a>
+            </li>
 
-<li>
-<a href="/lost">Lost Items</a>
-</li>
+            <li>
+                <a href="/lost">Lost Items</a>
+            </li>
 
-<li>
-<a href="/found">Found Items</a>
-</li>
+            <li>
+                <a href="/found">Found Items</a>
+            </li>
 
-<li>
-<a href="#">Contact</a>
-</li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
 
-</ul>
+        </ul>
 
-</nav>
+    </nav>
 
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
-
 <section class="hero">
 
-<h1>
-College Lost & Found Portal
-</h1>
+    <h1>College Lost & Found</h1>
 
-<p>
-Search, Report, and Claim Lost & Found Items Easily
-</p>
+    <p>
+        Lost something? Found something?
+        Help your fellow students find their belongings.
+    </p>
 
+    <div class="action-buttons">
 
-<div class="search-box">
+        <a href="/lost">
 
-<input
-type="text"
-id="searchInput"
-placeholder="Search by item name, description or location..."
->
+            <button class="lost-btn">
+                🔴 Report Lost Item
+            </button>
 
-<button onclick="searchItems()">
-🔍 Search
-</button>
+        </a>
 
-</div>
+        <a href="/found">
 
+            <button class="found-btn">
+                🟢 Report Found Item
+            </button>
 
-<div class="action-buttons">
+        </a>
 
-<a href="LostItems.HTML">
-
-<button class="lost-btn">
-🔴 Report Lost Item
-</button>
-
-</a>
-
-
-<a href="FoundItems.HTML">
-
-<button class="found-btn">
-🟢 Report Found Item
-</button>
-
-</a>
-
-</div>
+    </div>
 
 </section>
 
 
-
-<!-- =========================
-     LOST ITEMS
-========================= -->
-
 <div class="container">
 
-<h2 class="section-title">
-Recently Lost Items
-</h2>
+    <div class="search-box">
 
-<div id="lostStatus" class="status">
-Loading lost items...
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search lost or found items..."
+            oninput="searchItems()"
+        >
+
+    </div>
+
+
+    <!-- LOST ITEMS -->
+
+    <section class="section">
+
+        <h2>🔴 Lost Items</h2>
+
+        <div
+            id="lostStatus"
+            class="status"
+        >
+            Loading lost items...
+        </div>
+
+        <div
+            id="lostItems"
+            class="items-grid"
+        ></div>
+
+    </section>
+
+
+    <!-- FOUND ITEMS -->
+
+    <section class="section">
+
+        <h2>🟢 Found Items</h2>
+
+        <div
+            id="foundStatus"
+            class="status"
+        >
+            Loading found items...
+        </div>
+
+        <div
+            id="foundItems"
+            class="items-grid"
+        ></div>
+
+    </section>
+
 </div>
 
-<div class="cards" id="lostItems">
-
-</div>
-
-</div>
-
-
-
-<!-- =========================
-     FOUND ITEMS
-========================= -->
-
-<div class="container">
-
-<h2 class="section-title">
-Recently Found Items
-</h2>
-
-<div id="foundStatus" class="status">
-Loading found items...
-</div>
-
-<div class="cards" id="foundItems">
-
-</div>
-
-</div>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
-<p>
-© 2026 College Lost & Found Portal | Designed for College Project
-</p>
+    <p>
+        © 2026 College Lost & Found Portal
+    </p>
 
 </footer>
 
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
 
 <script>
 
 let allItems = [];
 
 
-// Load items from MongoDB
-async function loadItems(){
+// ===============================
+// LOAD ITEMS
+// ===============================
 
-    try{
+async function loadItems() {
 
-        const response = await fetch("/api/items");
+    try {
 
-        if(!response.ok){
+        const response =
+            await fetch("/api/items");
+
+
+        if (!response.ok) {
 
             throw new Error(
-                "Server returned " + response.status
+                "Server returned " +
+                response.status
             );
 
         }
 
-        allItems = await response.json();
+
+        allItems =
+            await response.json();
+
 
         displayItems(allItems);
 
-    }
 
-    catch(error){
+    } catch (error) {
 
-        console.error("Error loading items:", error);
+        console.error(
+            "Error loading items:",
+            error
+        );
 
-        document.getElementById("lostStatus").textContent =
+
+        document
+            .getElementById("lostStatus")
+            .textContent =
             "❌ Could not load lost items.";
 
-        document.getElementById("foundStatus").textContent =
+
+        document
+            .getElementById("foundStatus")
+            .textContent =
             "❌ Could not load found items.";
 
     }
@@ -552,184 +442,256 @@ async function loadItems(){
 }
 
 
+// ===============================
+// DISPLAY ITEMS
+// ===============================
 
-// Display items
-function displayItems(items){
+function displayItems(items) {
 
-    const lostContainer =
-        document.getElementById("lostItems");
+    const lostItemsContainer =
+        document.getElementById(
+            "lostItems"
+        );
 
-    const foundContainer =
-        document.getElementById("foundItems");
+
+    const foundItemsContainer =
+        document.getElementById(
+            "foundItems"
+        );
 
 
     const lostStatus =
-        document.getElementById("lostStatus");
+        document.getElementById(
+            "lostStatus"
+        );
+
 
     const foundStatus =
-        document.getElementById("foundStatus");
-
-
-    lostContainer.innerHTML = "";
-    foundContainer.innerHTML = "";
+        document.getElementById(
+            "foundStatus"
+        );
 
 
     const lostItems =
-        items.filter(item => item.type === "lost");
+        items.filter(
+            item =>
+                item.type === "lost"
+        );
 
 
     const foundItems =
-        items.filter(item => item.type === "found");
+        items.filter(
+            item =>
+                item.type === "found"
+        );
 
 
-    // Lost items
+    // -----------------------------
+    // LOST
+    // -----------------------------
 
-    if(lostItems.length === 0){
+    if (lostItems.length === 0) {
+
+        lostItemsContainer.innerHTML = "";
 
         lostStatus.textContent =
             "No lost items reported.";
 
-    }
-
-    else{
+    } else {
 
         lostStatus.textContent = "";
 
-        lostItems.forEach(item => {
-
-            lostContainer.appendChild(
-                createCard(item)
-            );
-
-        });
+        lostItemsContainer.innerHTML =
+            lostItems
+                .map(createCard)
+                .join("");
 
     }
 
 
-    // Found items
+    // -----------------------------
+    // FOUND
+    // -----------------------------
 
-    if(foundItems.length === 0){
+    if (foundItems.length === 0) {
+
+        foundItemsContainer.innerHTML = "";
 
         foundStatus.textContent =
             "No found items reported.";
 
-    }
-
-    else{
+    } else {
 
         foundStatus.textContent = "";
 
-        foundItems.forEach(item => {
-
-            foundContainer.appendChild(
-                createCard(item)
-            );
-
-        });
+        foundItemsContainer.innerHTML =
+            foundItems
+                .map(createCard)
+                .join("");
 
     }
 
 }
 
 
+// ===============================
+// CREATE CARD
+// ===============================
 
-// Create card
-function createCard(item){
-
-    const card =
-        document.createElement("div");
-
-    card.className = "card";
-
+function createCard(item) {
 
     let imageHTML = "";
 
-    if(item.photo){
+
+    // =============================
+    // PRIVATE IMAGE
+    // =============================
+
+    if (item.photo) {
 
         imageHTML = `
             <img
-                src="${item.photo}"
-                alt="${item.itemName}"
+                src="/api/items/${item._id}/image"
+                alt="${escapeHTML(
+                    item.itemName || "Item"
+                )}"
+                onerror="this.style.display='none'"
             >
         `;
 
     }
 
 
-    const date =
-        item.date
-        ? new Date(item.date).toLocaleDateString()
-        : "Not provided";
+    // =============================
+    // MATCH STATUS
+    // =============================
+
+    let matchStatusHTML = "";
 
 
-    card.innerHTML = `
+    if (
+        item.matchStatus === "matched"
+    ) {
 
-        ${imageHTML}
+        matchStatusHTML = `
+            <div class="status-badge matched">
+                ✅ Possible Match Found
+                (${item.matchScore || 0}%)
+            </div>
+        `;
 
-        <div class="card-content">
+    } else {
 
-            <h3>
-                ${escapeHTML(item.itemName)}
-            </h3>
+        matchStatusHTML = `
+            <div class="status-badge waiting">
+                ⏳ Waiting for Match
+            </div>
+        `;
 
-            <p>
-                <b>
-                    ${item.type === "found"
-                        ? "Found At:"
-                        : "Location:"
+    }
+
+
+    // =============================
+    // CARD
+    // =============================
+
+    return `
+
+        <div class="card">
+
+            ${imageHTML}
+
+            <div class="card-content">
+
+                <h3>
+                    ${escapeHTML(
+                        item.itemName ||
+                        "Unnamed Item"
+                    )}
+                </h3>
+
+
+                <p>
+
+                    <strong>
+                        Description:
+                    </strong>
+
+                    ${escapeHTML(
+                        item.description ||
+                        "No description"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Location:
+                    </strong>
+
+                    ${escapeHTML(
+                        item.location ||
+                        "Unknown"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Date:
+                    </strong>
+
+                    ${
+                        item.date
+                        ? new Date(
+                            item.date
+                          ).toLocaleDateString()
+                        : "Unknown"
                     }
-                </b>
 
-                ${escapeHTML(item.location)}
-            </p>
+                </p>
 
-            <p>
-                <b>Date:</b>
-                ${date}
-            </p>
 
-            <p>
-                <b>Description:</b>
-                ${escapeHTML(item.description)}
-            </p>
+                ${matchStatusHTML}
 
-            <p>
-                <b>Contact:</b>
-                ${escapeHTML(item.contact)}
-            </p>
 
-            <button
-                onclick="viewItem('${item._id}')"
-            >
-                ${item.type === "found"
-                    ? "Claim Item"
-                    : "View Details"
-                }
-            </button>
+                <button
+                    class="view-btn"
+                    onclick="viewItem('${item._id}')"
+                >
+                    View Details
+                </button>
+
+            </div>
 
         </div>
 
     `;
 
-
-    return card;
-
 }
 
 
+// ===============================
+// SEARCH
+// ===============================
 
-// Search
-function searchItems(){
+function searchItems() {
 
     const search =
         document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
 
 
-    if(search === ""){
+    if (!search) {
 
         displayItems(allItems);
 
@@ -738,50 +700,61 @@ function searchItems(){
     }
 
 
-    const filtered =
+    const filteredItems =
         allItems.filter(item => {
 
+            const itemName =
+                String(
+                    item.itemName || ""
+                ).toLowerCase();
+
+
+            const description =
+                String(
+                    item.description || ""
+                ).toLowerCase();
+
+
+            const location =
+                String(
+                    item.location || ""
+                ).toLowerCase();
+
+
             return (
-
-                item.itemName
-                    .toLowerCase()
-                    .includes(search)
-
-                ||
-
-                item.description
-                    .toLowerCase()
-                    .includes(search)
-
-                ||
-
-                item.location
-                    .toLowerCase()
-                    .includes(search)
-
+                itemName.includes(search) ||
+                description.includes(search) ||
+                location.includes(search)
             );
 
         });
 
 
-    displayItems(filtered);
+    displayItems(
+        filteredItems
+    );
 
 }
 
 
+// ===============================
+// VIEW ITEM
+// ===============================
 
-// View item
-function viewItem(id){
+function viewItem(id) {
 
     const item =
         allItems.find(
-            item => item._id === id
+            item =>
+                item._id === id
         );
 
 
-    if(!item){
+    if (!item) {
 
-        alert("Item not found.");
+        alert(
+            "Item not found."
+        );
 
         return;
 
@@ -790,54 +763,95 @@ function viewItem(id){
 
     alert(
 
-        "Item: " + item.itemName +
-        "\n\n" +
+        "Item: " +
+        (
+            item.itemName ||
+            "Unknown"
+        ) +
 
-        "Description: " + item.description +
-        "\n\n" +
+        "\n\nDescription: " +
+        (
+            item.description ||
+            "N/A"
+        ) +
 
-        "Location: " + item.location +
-        "\n\n" +
+        "\n\nLocation: " +
+        (
+            item.location ||
+            "N/A"
+        ) +
 
-        "Date: " +
-        new Date(item.date)
-            .toLocaleDateString() +
-        "\n\n" +
+        "\n\nDate: " +
 
-        "Contact: " + item.contact
+        (
+            item.date
+                ? new Date(
+                    item.date
+                  ).toLocaleDateString()
+                : "N/A"
+        ) +
 
+        "\n\nStatus: " +
+
+        (
+            item.matchStatus === "matched"
+                ? "Possible Match Found (" +
+                  (item.matchScore || 0) +
+                  "%)"
+                : "Waiting for Match"
+        )
+
+        // NOTE:
+        // Contact is intentionally NOT shown here.
     );
 
 }
 
 
+// ===============================
+// ESCAPE HTML
+// ===============================
 
-// Prevent HTML injection
-function escapeHTML(value){
-
-    if(value === null || value === undefined){
-
-        return "";
-
-    }
+function escapeHTML(value) {
 
     return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
+// ===============================
+// START
+// ===============================
 
-// Start
 loadItems();
 
 </script>
 
-
 </body>
-
 </html>
+```

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +72,19 @@
             margin-top: 20px;
             text-align: center;
             font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .match {
+            color: #2e7d32;
+        }
+
+        .waiting {
+            color: #ef6c00;
+        }
+
+        .error {
+            color: #c62828;
         }
     </style>
 </head>
@@ -88,8 +102,12 @@
         <label>Item Name</label>
         <input type="text" id="itemName" required>
 
-        <label>Description</label>
-        <textarea id="description" required></textarea>
+        <label>Description / Specifications</label>
+        <textarea
+            id="description"
+            placeholder="Add colour, model, marks, case, scratches, stickers, etc."
+            required
+        ></textarea>
 
         <label>Location Found</label>
         <input type="text" id="location" required>
@@ -103,7 +121,9 @@
         <label>Contact</label>
         <input type="text" id="contact" required>
 
-        <button type="submit">Report Found Item</button>
+        <button type="submit">
+            Report Found Item
+        </button>
 
     </form>
 
@@ -113,89 +133,196 @@
 
 <script>
 
-// Render backend URL
-const API_URL = "https://college-lost-found-61k7.onrender.com";
+const API_URL =
+    "https://college-lost-found-61k7.onrender.com";
 
-document.getElementById("foundItemForm").addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+document
+    .getElementById("foundItemForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-    const message = document.getElementById("message");
+            event.preventDefault();
 
-    const formData = new FormData();
+            const message =
+                document.getElementById("message");
 
-    formData.append("type", "found");
-    formData.append(
-        "itemName",
-        document.getElementById("itemName").value
-    );
-    formData.append(
-        "description",
-        document.getElementById("description").value
-    );
-    formData.append(
-        "location",
-        document.getElementById("location").value
-    );
-    formData.append(
-        "date",
-        document.getElementById("date").value
-    );
-    formData.append(
-        "contact",
-        document.getElementById("contact").value
-    );
+            const formData =
+                new FormData();
 
-    const photo = document.getElementById("photo").files[0];
 
-    if (!photo) {
-        message.textContent =
-            "❌ Photo is required for found items.";
-        return;
-    }
+            // -----------------------------
+            // FORM DATA
+            // -----------------------------
 
-    formData.append("photo", photo);
+            formData.append(
+                "type",
+                "found"
+            );
 
-    try {
+            formData.append(
+                "itemName",
+                document
+                    .getElementById("itemName")
+                    .value
+            );
 
-        message.textContent = "Uploading...";
+            formData.append(
+                "description",
+                document
+                    .getElementById("description")
+                    .value
+            );
 
-        const response = await fetch(
-            `${API_URL}/api/items`,
-            {
-                method: "POST",
-                body: formData
+            formData.append(
+                "location",
+                document
+                    .getElementById("location")
+                    .value
+            );
+
+            formData.append(
+                "date",
+                document
+                    .getElementById("date")
+                    .value
+            );
+
+            formData.append(
+                "contact",
+                document
+                    .getElementById("contact")
+                    .value
+            );
+
+
+            // -----------------------------
+            // PHOTO
+            // -----------------------------
+
+            const photo =
+                document
+                    .getElementById("photo")
+                    .files[0];
+
+
+            if (!photo) {
+
+                message.className = "error";
+
+                message.textContent =
+                    "❌ Photo is required for found items.";
+
+                return;
             }
-        );
 
-        const data = await response.json();
 
-        if (response.ok) {
+            formData.append(
+                "photo",
+                photo
+            );
 
-            message.textContent =
-                "✅ Found item reported successfully!";
 
-            document.getElementById("foundItemForm").reset();
+            try {
 
-        } else {
+                message.className = "";
 
-            message.textContent =
-                "❌ Error: " + (data.error || "Something went wrong.");
+                message.textContent =
+                    "🔍 Checking for matching lost items...";
+
+
+                // -----------------------------
+                // SEND TO SERVER
+                // -----------------------------
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/items`,
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                // -----------------------------
+                // RESPONSE
+                // -----------------------------
+
+                if (response.ok) {
+
+                    if (data.matched) {
+
+                        message.className =
+                            "match";
+
+                        message.innerHTML =
+                            `
+                            ✅ <strong>Possible match found!</strong><br>
+                            Match score: ${data.matchScore}%<br>
+                            The system found a matching lost-item report.
+                            `;
+
+                    } else {
+
+                        message.className =
+                            "waiting";
+
+                        message.innerHTML =
+                            `
+                            ⏳ <strong>No strong match yet.</strong><br>
+                            Your found item has been saved.<br>
+                            It will remain waiting for a matching lost-item report.
+                            `;
+
+                    }
+
+
+                    document
+                        .getElementById("foundItemForm")
+                        .reset();
+
+
+                } else {
+
+                    message.className =
+                        "error";
+
+                    message.textContent =
+                        "❌ Error: " +
+                        (
+                            data.error ||
+                            "Something went wrong."
+                        );
+
+                }
+
+
+            } catch (error) {
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "❌ Could not connect to the server.";
+
+                console.error(
+                    "Error:",
+                    error
+                );
+
+            }
 
         }
-
-    } catch (error) {
-
-        message.textContent =
-            "❌ Could not connect to the server.";
-
-        console.error("Error:", error);
-
-    }
-
-});
+    );
 
 </script>
 
 </body>
 </html>
+```

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +72,19 @@
             margin-top: 20px;
             text-align: center;
             font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .match {
+            color: #2e7d32;
+        }
+
+        .waiting {
+            color: #ef6c00;
+        }
+
+        .error {
+            color: #c62828;
         }
     </style>
 </head>
@@ -88,8 +102,12 @@
         <label>Item Name</label>
         <input type="text" id="itemName" required>
 
-        <label>Description</label>
-        <textarea id="description" required></textarea>
+        <label>Description / Specifications</label>
+        <textarea
+            id="description"
+            placeholder="Add colour, model, marks, scratches, stickers, unique features, etc."
+            required
+        ></textarea>
 
         <label>Location</label>
         <input type="text" id="location" required>
@@ -100,7 +118,9 @@
         <label>Contact</label>
         <input type="text" id="contact" required>
 
-        <button type="submit">Report Lost Item</button>
+        <button type="submit">
+            Report Lost Item
+        </button>
 
     </form>
 
@@ -110,63 +130,163 @@
 
 <script>
 
-const API_URL = "https://college-lost-found-61k7.onrender.com";
+const API_URL =
+    "https://college-lost-found-61k7.onrender.com";
 
-document.getElementById("lostItemForm").addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+document
+    .getElementById("lostItemForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-    const message = document.getElementById("message");
+            event.preventDefault();
 
-    const item = {
-        type: "lost",
-        itemName: document.getElementById("itemName").value,
-        description: document.getElementById("description").value,
-        location: document.getElementById("location").value,
-        date: document.getElementById("date").value,
-        contact: document.getElementById("contact").value
-    };
+            const message =
+                document.getElementById("message");
 
-    try {
 
-        message.textContent = "Submitting...";
+            // -----------------------------
+            // CREATE ITEM
+            // -----------------------------
 
-        const response = await fetch(`${API_URL}/api/items`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(item)
-        });
+            const item = {
 
-        const data = await response.json();
+                type: "lost",
 
-        if (response.ok) {
+                itemName:
+                    document
+                        .getElementById("itemName")
+                        .value,
 
-            message.textContent =
-                "✅ Lost item reported successfully!";
+                description:
+                    document
+                        .getElementById("description")
+                        .value,
 
-            document.getElementById("lostItemForm").reset();
+                location:
+                    document
+                        .getElementById("location")
+                        .value,
 
-        } else {
+                date:
+                    document
+                        .getElementById("date")
+                        .value,
 
-            message.textContent =
-                "❌ Error: " + (data.error || "Something went wrong.");
+                contact:
+                    document
+                        .getElementById("contact")
+                        .value
+            };
+
+
+            try {
+
+                message.className = "";
+
+                message.textContent =
+                    "🔍 Checking for matching found items...";
+
+
+                // -----------------------------
+                // SEND TO SERVER
+                // -----------------------------
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/items`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(item)
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                // -----------------------------
+                // RESPONSE
+                // -----------------------------
+
+                if (response.ok) {
+
+                    if (data.matched) {
+
+                        message.className =
+                            "match";
+
+                        message.innerHTML =
+                            `
+                            ✅ <strong>Possible match found!</strong><br>
+                            Match score: ${data.matchScore}%<br>
+                            The system found a matching found-item report.
+                            `;
+
+                    } else {
+
+                        message.className =
+                            "waiting";
+
+                        message.innerHTML =
+                            `
+                            ⏳ <strong>No strong match yet.</strong><br>
+                            Your lost item has been saved.<br>
+                            It will remain waiting for a matching found-item report.
+                            `;
+
+                    }
+
+
+                    document
+                        .getElementById("lostItemForm")
+                        .reset();
+
+
+                } else {
+
+                    message.className =
+                        "error";
+
+                    message.textContent =
+                        "❌ Error: " +
+                        (
+                            data.error ||
+                            "Something went wrong."
+                        );
+
+                }
+
+
+            } catch (error) {
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "❌ Could not connect to the server.";
+
+                console.error(
+                    "Error:",
+                    error
+                );
+
+            }
 
         }
-
-    } catch (error) {
-
-        message.textContent =
-            "❌ Could not connect to the server.";
-
-        console.error("Error:", error);
-
-    }
-
-});
+    );
 
 </script>
 
 </body>
 </html>
+```
