@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,50 +15,36 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            color: #222;
-        }
-
-        header {
-            background: #111827;
-            padding: 18px 40px;
+            background: #f5f5f5;
+            min-height: 100vh;
         }
 
         nav {
+            background: #111;
+            padding: 18px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: auto;
         }
 
-        .logo {
+        nav h2 {
             color: white;
-            font-size: 24px;
-            font-weight: bold;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        nav ul li a {
+        nav a {
             color: white;
             text-decoration: none;
-            font-size: 16px;
-        }
-
-        nav ul li a:hover {
-            color: #60a5fa;
+            margin-left: 25px;
         }
 
         .hero {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 70px 20px;
-            background: linear-gradient(135deg, #2563eb, #1e3a8a);
-            color: white;
+            padding: 30px;
         }
 
         .hero h1 {
@@ -69,789 +54,71 @@
 
         .hero p {
             font-size: 18px;
+            color: #555;
+            max-width: 600px;
             margin-bottom: 30px;
         }
 
-        .action-buttons {
+        .buttons {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .action-buttons a {
-            text-decoration: none;
-        }
-
-        .action-buttons button {
-            border: none;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .lost-btn {
-            background: #ef4444;
-            color: white;
-        }
-
-        .found-btn {
-            background: #22c55e;
-            color: white;
-        }
-
-        .action-buttons button:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .search-box {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .search-box input {
-            width: 100%;
-            max-width: 600px;
-            padding: 14px 18px;
-            border: 1px solid #ccc;
+        .button {
+            padding: 14px 25px;
             border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .section {
-            margin-bottom: 50px;
-        }
-
-        .section h2 {
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-
-        .items-grid {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-        }
-
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .card-content {
-            padding: 18px;
-        }
-
-        .card-content h3 {
-            margin-bottom: 10px;
-        }
-
-        .card-content p {
-            margin: 7px 0;
-            color: #555;
-        }
-
-        .status-badge {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 13px;
+            text-decoration: none;
             font-weight: bold;
         }
 
-        .waiting {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .matched {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .view-btn {
-            margin-top: 12px;
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 7px;
-            background: #2563eb;
+        .lost {
+            background: #222;
             color: white;
-            cursor: pointer;
-            font-weight: bold;
         }
 
-        .view-btn:hover {
-            background: #1d4ed8;
-        }
-
-        .status {
-            color: #777;
-            text-align: center;
-            padding: 20px;
-        }
-
-        footer {
-            background: #111827;
-            color: white;
-            text-align: center;
-            padding: 25px;
-            margin-top: 50px;
-        }
-
-        @media (max-width: 700px) {
-
-            header {
-                padding: 15px 20px;
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
+        .found {
+            background: #ddd;
+            color: #111;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-
     <nav>
+        <h2>College Lost & Found</h2>
 
-        <div class="logo">
-            🎒 Lost & Found
+        <div>
+            <a href="/">Home</a>
+            <a href="/lost">Report Lost</a>
+            <a href="/found">Report Found</a>
         </div>
-
-        <ul>
-
-            <li>
-                <a href="/">Home</a>
-            </li>
-
-            <li>
-                <a href="/lost">Lost Items</a>
-            </li>
-
-            <li>
-                <a href="/found">Found Items</a>
-            </li>
-
-            <li>
-                <a href="#">Contact</a>
-            </li>
-
-        </ul>
-
     </nav>
 
-</header>
+    <section class="hero">
 
+        <h1>College Lost & Found</h1>
 
-<section class="hero">
+        <p>
+            Lost something? Report it here.
+            Found something? Submit it here.
+            Our system will automatically check submitted details
+            for possible matches.
+        </p>
 
-    <h1>College Lost & Found</h1>
+        <div class="buttons">
 
-    <p>
-        Lost something? Found something?
-        Help your fellow students find their belongings.
-    </p>
+            <a href="/lost" class="button lost">
+                I Lost Something
+            </a>
 
-    <div class="action-buttons">
+            <a href="/found" class="button found">
+                I Found Something
+            </a>
 
-        <a href="/lost">
-
-            <button class="lost-btn">
-                🔴 Report Lost Item
-            </button>
-
-        </a>
-
-        <a href="/found">
-
-            <button class="found-btn">
-                🟢 Report Found Item
-            </button>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<div class="container">
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="🔍 Search lost or found items..."
-            oninput="searchItems()"
-        >
-
-    </div>
-
-
-    <!-- LOST ITEMS -->
-
-    <section class="section">
-
-        <h2>🔴 Lost Items</h2>
-
-        <div
-            id="lostStatus"
-            class="status"
-        >
-            Loading lost items...
         </div>
-
-        <div
-            id="lostItems"
-            class="items-grid"
-        ></div>
 
     </section>
-
-
-    <!-- FOUND ITEMS -->
-
-    <section class="section">
-
-        <h2>🟢 Found Items</h2>
-
-        <div
-            id="foundStatus"
-            class="status"
-        >
-            Loading found items...
-        </div>
-
-        <div
-            id="foundItems"
-            class="items-grid"
-        ></div>
-
-    </section>
-
-</div>
-
-
-<footer>
-
-    <p>
-        © 2026 College Lost & Found Portal
-    </p>
-
-</footer>
-
-
-<script>
-
-let allItems = [];
-
-
-// ===============================
-// LOAD ITEMS
-// ===============================
-
-async function loadItems() {
-
-    try {
-
-        const response =
-            await fetch("/api/items");
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Server returned " +
-                response.status
-            );
-
-        }
-
-
-        allItems =
-            await response.json();
-
-
-        displayItems(allItems);
-
-
-    } catch (error) {
-
-        console.error(
-            "Error loading items:",
-            error
-        );
-
-
-        document
-            .getElementById("lostStatus")
-            .textContent =
-            "❌ Could not load lost items.";
-
-
-        document
-            .getElementById("foundStatus")
-            .textContent =
-            "❌ Could not load found items.";
-
-    }
-
-}
-
-
-// ===============================
-// DISPLAY ITEMS
-// ===============================
-
-function displayItems(items) {
-
-    const lostItemsContainer =
-        document.getElementById(
-            "lostItems"
-        );
-
-
-    const foundItemsContainer =
-        document.getElementById(
-            "foundItems"
-        );
-
-
-    const lostStatus =
-        document.getElementById(
-            "lostStatus"
-        );
-
-
-    const foundStatus =
-        document.getElementById(
-            "foundStatus"
-        );
-
-
-    const lostItems =
-        items.filter(
-            item =>
-                item.type === "lost"
-        );
-
-
-    const foundItems =
-        items.filter(
-            item =>
-                item.type === "found"
-        );
-
-
-    // -----------------------------
-    // LOST
-    // -----------------------------
-
-    if (lostItems.length === 0) {
-
-        lostItemsContainer.innerHTML = "";
-
-        lostStatus.textContent =
-            "No lost items reported.";
-
-    } else {
-
-        lostStatus.textContent = "";
-
-        lostItemsContainer.innerHTML =
-            lostItems
-                .map(createCard)
-                .join("");
-
-    }
-
-
-    // -----------------------------
-    // FOUND
-    // -----------------------------
-
-    if (foundItems.length === 0) {
-
-        foundItemsContainer.innerHTML = "";
-
-        foundStatus.textContent =
-            "No found items reported.";
-
-    } else {
-
-        foundStatus.textContent = "";
-
-        foundItemsContainer.innerHTML =
-            foundItems
-                .map(createCard)
-                .join("");
-
-    }
-
-}
-
-
-// ===============================
-// CREATE CARD
-// ===============================
-
-function createCard(item) {
-
-    let imageHTML = "";
-
-
-    // =============================
-    // PRIVATE IMAGE
-    // =============================
-
-    if (item.photo) {
-
-        imageHTML = `
-            <img
-                src="/api/items/${item._id}/image"
-                alt="${escapeHTML(
-                    item.itemName || "Item"
-                )}"
-                onerror="this.style.display='none'"
-            >
-        `;
-
-    }
-
-
-    // =============================
-    // MATCH STATUS
-    // =============================
-
-    let matchStatusHTML = "";
-
-
-    if (
-        item.matchStatus === "matched"
-    ) {
-
-        matchStatusHTML = `
-            <div class="status-badge matched">
-                ✅ Possible Match Found
-                (${item.matchScore || 0}%)
-            </div>
-        `;
-
-    } else {
-
-        matchStatusHTML = `
-            <div class="status-badge waiting">
-                ⏳ Waiting for Match
-            </div>
-        `;
-
-    }
-
-
-    // =============================
-    // CARD
-    // =============================
-
-    return `
-
-        <div class="card">
-
-            ${imageHTML}
-
-            <div class="card-content">
-
-                <h3>
-                    ${escapeHTML(
-                        item.itemName ||
-                        "Unnamed Item"
-                    )}
-                </h3>
-
-
-                <p>
-
-                    <strong>
-                        Description:
-                    </strong>
-
-                    ${escapeHTML(
-                        item.description ||
-                        "No description"
-                    )}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Location:
-                    </strong>
-
-                    ${escapeHTML(
-                        item.location ||
-                        "Unknown"
-                    )}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Date:
-                    </strong>
-
-                    ${
-                        item.date
-                        ? new Date(
-                            item.date
-                          ).toLocaleDateString()
-                        : "Unknown"
-                    }
-
-                </p>
-
-
-                ${matchStatusHTML}
-
-
-                <button
-                    class="view-btn"
-                    onclick="viewItem('${item._id}')"
-                >
-                    View Details
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-// ===============================
-// SEARCH
-// ===============================
-
-function searchItems() {
-
-    const search =
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .toLowerCase()
-            .trim();
-
-
-    if (!search) {
-
-        displayItems(allItems);
-
-        return;
-
-    }
-
-
-    const filteredItems =
-        allItems.filter(item => {
-
-            const itemName =
-                String(
-                    item.itemName || ""
-                ).toLowerCase();
-
-
-            const description =
-                String(
-                    item.description || ""
-                ).toLowerCase();
-
-
-            const location =
-                String(
-                    item.location || ""
-                ).toLowerCase();
-
-
-            return (
-                itemName.includes(search) ||
-                description.includes(search) ||
-                location.includes(search)
-            );
-
-        });
-
-
-    displayItems(
-        filteredItems
-    );
-
-}
-
-
-// ===============================
-// VIEW ITEM
-// ===============================
-
-function viewItem(id) {
-
-    const item =
-        allItems.find(
-            item =>
-                item._id === id
-        );
-
-
-    if (!item) {
-
-        alert(
-            "Item not found."
-        );
-
-        return;
-
-    }
-
-
-    alert(
-
-        "Item: " +
-        (
-            item.itemName ||
-            "Unknown"
-        ) +
-
-        "\n\nDescription: " +
-        (
-            item.description ||
-            "N/A"
-        ) +
-
-        "\n\nLocation: " +
-        (
-            item.location ||
-            "N/A"
-        ) +
-
-        "\n\nDate: " +
-
-        (
-            item.date
-                ? new Date(
-                    item.date
-                  ).toLocaleDateString()
-                : "N/A"
-        ) +
-
-        "\n\nStatus: " +
-
-        (
-            item.matchStatus === "matched"
-                ? "Possible Match Found (" +
-                  (item.matchScore || 0) +
-                  "%)"
-                : "Waiting for Match"
-        )
-
-        // NOTE:
-        // Contact is intentionally NOT shown here.
-    );
-
-}
-
-
-// ===============================
-// ESCAPE HTML
-// ===============================
-
-function escapeHTML(value) {
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-// ===============================
-// START
-// ===============================
-
-loadItems();
-
-</script>
 
 </body>
 </html>
-```
